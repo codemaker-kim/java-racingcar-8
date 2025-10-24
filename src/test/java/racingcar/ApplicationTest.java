@@ -54,12 +54,10 @@ class ApplicationTest extends NsTest {
     @DisplayName("시도 횟수가 빈 문자열일 경우 예외 발생")
     void inputEmptyTryCount() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("java,code", ""))
+                assertThatThrownBy(() -> runException("java,code", "\n"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
-
-
 
     @Override
     public void runMain() {
