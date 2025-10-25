@@ -78,10 +78,10 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    @DisplayName("차 이름이 5자 이상일 경우 예외 발생")
+    @DisplayName("차 이름이 5자 초과일 경우 예외 발생")
     void tooLongCarName() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("sumin,java", "2"))
+                assertThatThrownBy(() -> runException("isumin,java", "2"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
