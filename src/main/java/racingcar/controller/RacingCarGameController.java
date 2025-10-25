@@ -3,17 +3,21 @@ package racingcar.controller;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import racingcar.controller.validator.CarNameValidator;
 import racingcar.controller.validator.TryCountValidator;
+import racingcar.model.Car;
 import racingcar.view.input.InputView;
 
 public class RacingCarGameController {
 
     private static final String COMMA = ",";
+    private static final int BASE_POSITION = 0;
 
     public void play() {
         String carNames = getCarNames();
-        String tryCount = getTryCount();
+        String tryCountInput = getTryCount();
 
         CarNameValidator.validateCarNameIsEmpty(carNames);
 
@@ -22,10 +26,18 @@ public class RacingCarGameController {
         ).toList();
 
         CarNameValidator.validateCarNames(carNameList);
-        TryCountValidator.validateTryCount(tryCount);
+        TryCountValidator.validateTryCount(tryCountInput);
 
-        // 2. 리스트를 순회하며 이름을 가진 객체 Car를 생성
-        // 3. 순회하며 accelerate 메서드 실행
+        int tryCount = Integer.parseInt(tryCountInput);
+
+        Set<Car> carSet = carNameList.stream()
+                .map(carName -> new Car(carName, BASE_POSITION))
+                .collect(Collectors.toSet());
+
+        for (int round = BASE_POSITION; round < tryCount; round++) {
+            carSet.forEach(Car::accelerate);
+        }
+
         // 4. OutputView 기반 출력
     }
 
