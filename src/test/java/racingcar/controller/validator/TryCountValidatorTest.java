@@ -22,4 +22,12 @@ class TryCountValidatorTest {
                 TryCountValidator.validateTryCount("0"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("시도 횟수가 숫자가 아닐 경우 예외 발생")
+    void tryCountNotNumericTest() {
+        assertThatThrownBy(() ->
+                TryCountValidator.validateTryCount("asdf"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
