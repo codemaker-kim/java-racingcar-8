@@ -32,7 +32,7 @@ class CarNameValidatorTest {
     }
 
     @Test
-    @DisplayName("자동차 이름 리스트 중에 5자 초과인 이름이 있을 경우 예외 발생 비어있을 때 예외 발생")
+    @DisplayName("자동차 이름 리스트 중에 5자 초과인 이름이 있을 경우 예외 발생")
     void carNameOverMaximumSizeTest() {
         assertThatThrownBy(() ->
                 CarNameValidator.validateCarNames("fortest,sumin,java"))
