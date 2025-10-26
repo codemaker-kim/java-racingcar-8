@@ -2,7 +2,7 @@ package racingcar;
 
 import java.util.List;
 import racingcar.controller.CarController;
-import racingcar.controller.RacingCarGameController;
+import racingcar.controller.GameController;
 import racingcar.model.Car;
 
 public class Application {
@@ -10,7 +10,7 @@ public class Application {
         CarController carController = new CarController();
         List<Car> carList = carController.generateCarList();
 
-        RacingCarGameController gameController = new RacingCarGameController(carList);
+        GameController gameController = new GameController(carList);
 
         gameController.play();
     }

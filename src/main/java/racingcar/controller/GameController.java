@@ -8,12 +8,12 @@ import racingcar.model.Car;
 import racingcar.view.input.InputView;
 import racingcar.view.output.OutputView;
 
-public class RacingCarGameController {
+public class GameController {
 
     private static final int BASE_POSITION = 0;
     private final List<Car> carList;
 
-    public RacingCarGameController(List<Car> carList) {
+    public GameController(List<Car> carList) {
         this.carList = carList;
     }
 
