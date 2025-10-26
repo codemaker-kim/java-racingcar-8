@@ -23,20 +23,29 @@ public class GameController {
 
         int tryCount = Integer.parseInt(tryCountInput);
 
+        runGame(tryCount);
+
+        List<Car> winners = findWinners();
+        OutputView.printWinners(winners);
+    }
+
+    private void runGame(int tryCount) {
         OutputView.printResultPrompt();
 
         for (int round = BASE_POSITION; round < tryCount; round++) {
             carList.forEach(Car::accelerate);
             OutputView.printRoundResult(carList);
         }
-
-        List<Car> winners = findWinners(tryCount);
-        OutputView.printWinners(winners);
     }
 
-    private List<Car> findWinners(int tryCount) {
+    private List<Car> findWinners() {
+        int maxPosition = carList.stream()
+                .mapToInt(Car::getPosition)
+                .max()
+                .orElse(BASE_POSITION);
+
         return carList.stream()
-                .filter(car -> car.getPosition() == tryCount)
+                .filter(car -> car.getPosition() == maxPosition)
                 .collect(toList());
     }
 }
