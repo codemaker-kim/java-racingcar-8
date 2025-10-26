@@ -7,6 +7,7 @@ import java.util.List;
 import racingcar.controller.dto.CarListDto;
 import racingcar.controller.validator.CarNameValidator;
 import racingcar.model.Car;
+import racingcar.model.RacingCar;
 import racingcar.view.input.InputView;
 
 public class CarController {
@@ -25,7 +26,7 @@ public class CarController {
         return Arrays.stream(
                         carNameInput.split(COMMA)
                 )
-                .map(carName -> new Car(carName, BASE_POSITION))
+                .map(carName -> new RacingCar(carName, BASE_POSITION))
                 .collect(toList());
     }
 }

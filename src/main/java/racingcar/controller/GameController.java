@@ -30,18 +30,13 @@ public class GameController {
             OutputView.printRoundResult(carList);
         }
 
-        List<Car> winners = findWinners(carList);
+        List<Car> winners = findWinners(tryCount);
         OutputView.printWinners(winners);
     }
 
-    private List<Car> findWinners(List<Car> cars) {
-        int maxPosition = cars.stream()
-                .mapToInt(Car::getPosition)
-                .max()
-                .orElse(BASE_POSITION);
-
-        return cars.stream()
-                .filter(car -> car.getPosition() == maxPosition)
+    private List<Car> findWinners(int tryCount) {
+        return carList.stream()
+                .filter(car -> car.getPosition() == tryCount)
                 .collect(toList());
     }
 }
