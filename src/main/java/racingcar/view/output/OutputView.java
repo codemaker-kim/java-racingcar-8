@@ -1,5 +1,6 @@
 package racingcar.view.output;
 
+import java.util.List;
 import java.util.Set;
 import racingcar.model.Car;
 
@@ -13,7 +14,7 @@ public class OutputView {
         System.out.println("실행 결과");
     }
 
-    public static void printRoundResult(Set<Car> cars) {
+    public static void printRoundResult(List<Car> cars) {
         cars.forEach(OutputView::printCarStatus);
         System.out.println();
     }
@@ -26,7 +27,7 @@ public class OutputView {
         return DASH.repeat(position);
     }
 
-    public static void printWinners(Set<Car> winners) {
+    public static void printWinners(List<Car> winners) {
         String winnerNames = winners.stream()
                 .map(Car::getName)
                 .reduce((name1, name2) -> name1 + COMMA + name2)
