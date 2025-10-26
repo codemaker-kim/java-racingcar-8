@@ -5,14 +5,21 @@ public class TryCountValidator {
     private static final int MINIMUM_TRYCOUNT = 1;
 
     public static void validateTryCount(String tryCountInput) {
+        validateTryCountIsEmpty(tryCountInput);
         validateTryCountFormat(tryCountInput);
+    }
+
+    private static void validateTryCountIsEmpty(String tryCountInput) {
+        if (tryCountInput.isEmpty()) {
+            throw new IllegalArgumentException("시도 횟수가 비어있음");
+        }
     }
 
     private static void validateTryCountFormat(String tryCountInput) {
         try {
             validateMinimumTryCount(tryCountInput);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("시도 횟수가 비어있음");
+            throw new IllegalArgumentException("시도 횟수는 숫자여야 합니다");
         }
     }
 
