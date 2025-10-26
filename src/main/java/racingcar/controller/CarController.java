@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.Arrays;
 import java.util.List;
+import racingcar.controller.dto.CarListDto;
 import racingcar.controller.validator.CarNameValidator;
 import racingcar.model.Car;
 import racingcar.view.input.InputView;
@@ -13,12 +14,11 @@ public class CarController {
     private static final String COMMA = ",";
     private static final int BASE_POSITION = 0;
 
-    public List<Car> generateCarList(){
+    public CarListDto generateCarList() {
         String carNameInput = InputView.inputCarNames();
-
         CarNameValidator.validateCarNames(carNameInput);
 
-        return collectToList(carNameInput);
+        return new CarListDto(collectToList(carNameInput));
     }
 
     private List<Car> collectToList(String carNameInput) {

@@ -1,16 +1,15 @@
 package racingcar;
 
-import java.util.List;
 import racingcar.controller.CarController;
 import racingcar.controller.GameController;
-import racingcar.model.Car;
+import racingcar.controller.dto.CarListDto;
 
 public class Application {
     public static void main(String[] args) {
         CarController carController = new CarController();
-        List<Car> carList = carController.generateCarList();
+        CarListDto carListDto = carController.generateCarList();
 
-        GameController gameController = new GameController(carList);
+        GameController gameController = new GameController(carListDto.carList());
 
         gameController.play();
     }
