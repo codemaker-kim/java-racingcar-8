@@ -18,8 +18,8 @@ public class RacingCarGameController {
     private static final int BASE_POSITION = 0;
 
     public void play() {
-        String carNameInput = InputView.inputTryCount();
-        String tryCountInput = InputView.inputCarNames();
+        String carNameInput = InputView.inputCarNames();
+        String tryCountInput = InputView.inputTryCount();
 
         CarNameValidator.validateCarNames(carNameInput);
         TryCountValidator.validateTryCount(tryCountInput);
