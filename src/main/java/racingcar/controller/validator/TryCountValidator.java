@@ -1,5 +1,9 @@
 package racingcar.controller.validator;
 
+import static racingcar.controller.validator.TryCountErrorMessage.BELOW_MINIMUM;
+import static racingcar.controller.validator.TryCountErrorMessage.EMPTY_TRY_COUNT;
+import static racingcar.controller.validator.TryCountErrorMessage.INVALID_NUMBER_FORMAT;
+
 public class TryCountValidator {
 
     private static final int MINIMUM_TRYCOUNT = 1;
@@ -11,7 +15,7 @@ public class TryCountValidator {
 
     private static void validateTryCountIsEmpty(String tryCountInput) {
         if (tryCountInput.isEmpty()) {
-            throw new IllegalArgumentException("시도 횟수가 비어있음");
+            throw new IllegalArgumentException(EMPTY_TRY_COUNT.getMessage());
         }
     }
 
@@ -19,7 +23,7 @@ public class TryCountValidator {
         try {
             validateMinimumTryCount(tryCountInput);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("시도 횟수는 숫자여야 합니다");
+            throw new IllegalArgumentException(INVALID_NUMBER_FORMAT.getMessage());
         }
     }
 
@@ -27,7 +31,7 @@ public class TryCountValidator {
         int tryCount = Integer.parseInt(tryCountInput);
 
         if (tryCount < MINIMUM_TRYCOUNT) {
-            throw new IllegalArgumentException("최소 시도횟수는 1번");
+            throw new IllegalArgumentException(BELOW_MINIMUM.getMessage());
         }
     }
 }

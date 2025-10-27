@@ -1,5 +1,9 @@
 package racingcar.controller.validator;
 
+import static racingcar.controller.validator.CarNameErrorMessage.CONTAINS_SPACE;
+import static racingcar.controller.validator.CarNameErrorMessage.DUPLICATE_NAME;
+import static racingcar.controller.validator.CarNameErrorMessage.EMPTY_CAR_NAME;
+import static racingcar.controller.validator.CarNameErrorMessage.TOO_LONG_NAME;
 import static racingcar.global.Separator.COMMA;
 import static racingcar.global.Separator.SPACE;
 
@@ -22,7 +26,7 @@ public class CarNameValidator {
 
     private static void validateCarNameIsEmpty(String carNameInput) {
         if (carNameInput.isEmpty()) {
-            throw new IllegalArgumentException("자동차 명이 비어있음");
+            throw new IllegalArgumentException(EMPTY_CAR_NAME.getMessage());
         }
     }
 
@@ -31,7 +35,7 @@ public class CarNameValidator {
                 .filter(CarNameValidator::isContainSpace)
                 .findFirst()
                 .ifPresent(carName -> {
-                    throw new IllegalArgumentException("자동차 명에 공백 포함");
+                    throw new IllegalArgumentException(CONTAINS_SPACE.getMessage());
                 });
     }
 
@@ -42,7 +46,7 @@ public class CarNameValidator {
                 .count();
 
         if (carNameList.size() != distinctCount) {
-            throw new IllegalArgumentException("중복 값 존재");
+            throw new IllegalArgumentException(DUPLICATE_NAME.getMessage());
         }
     }
 
@@ -53,7 +57,7 @@ public class CarNameValidator {
                 )
                 .findFirst()
                 .ifPresent(carName -> {
-                    throw new IllegalArgumentException("자동차 명은 5자 이하만 가능");
+                    throw new IllegalArgumentException(TOO_LONG_NAME.getMessage());
                 });
     }
 
