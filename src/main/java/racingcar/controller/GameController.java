@@ -1,5 +1,7 @@
 package racingcar.controller;
 
+import static java.math.BigDecimal.ZERO;
+
 import java.util.List;
 import racingcar.controller.validator.TryCountValidator;
 import racingcar.model.Car;
@@ -9,8 +11,6 @@ import racingcar.view.input.InputView;
 import racingcar.view.output.OutputView;
 
 public class GameController {
-
-    private static final int BASE_POSITION = 0;
 
     private final Cars cars;
     private final WinnerStrategy strategy;
@@ -35,7 +35,7 @@ public class GameController {
     private void runGame(int tryCount) {
         OutputView.printResultPrompt();
 
-        for (int round = BASE_POSITION; round < tryCount; round++) {
+        for (int round = ZERO.intValue(); round < tryCount; round++) {
             cars.accelerateAll();
 
             OutputView.printRoundResult(

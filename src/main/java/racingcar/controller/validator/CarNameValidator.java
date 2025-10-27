@@ -1,12 +1,13 @@
 package racingcar.controller.validator;
 
+import static racingcar.global.Seperator.COMMA;
+import static racingcar.global.Seperator.SPACE;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class CarNameValidator {
 
-    private static final String COMMA = ",";
-    private static final String SPACE = " ";
     private static final int MAXIMUM_CARNAME_LENGTH = 5;
 
     public static void validateCarNames(String carNameInput) {
@@ -26,12 +27,8 @@ public class CarNameValidator {
     }
 
     private static void validateCarNamesHaveNoSpaces(String carNameInput) {
-        Arrays.stream(
-                        carNameInput.split(COMMA)
-                )
-                .filter(
-                        carName -> carName.contains(SPACE)
-                )
+        Arrays.stream(splitCarNameInput(carNameInput))
+                .filter(CarNameValidator::isContainSpace)
                 .findFirst()
                 .ifPresent(carName -> {
                     throw new IllegalArgumentException("자동차 명에 공백 포함");
@@ -39,7 +36,7 @@ public class CarNameValidator {
     }
 
     private static void validateCarNamesAreUnique(String carNameInput) {
-        List<String> carNameList = Arrays.asList(carNameInput.split(COMMA));
+        List<String> carNameList = Arrays.asList(splitCarNameInput(carNameInput));
         long distinctCount = carNameList.stream()
                 .distinct()
                 .count();
@@ -50,9 +47,7 @@ public class CarNameValidator {
     }
 
     private static void validateCarNamesTooLong(String carNameInput) {
-        Arrays.stream(
-                        carNameInput.split(COMMA)
-                )
+        Arrays.stream(splitCarNameInput(carNameInput))
                 .filter(
                         carName -> carName.length() > MAXIMUM_CARNAME_LENGTH
                 )
@@ -60,5 +55,17 @@ public class CarNameValidator {
                 .ifPresent(carName -> {
                     throw new IllegalArgumentException("자동차 명은 5자 이하만 가능");
                 });
+    }
+
+    private static String[] splitCarNameInput(String carNameInput) {
+        return carNameInput.split(
+                COMMA.getSign()
+        );
+    }
+
+    private static boolean isContainSpace(String carName) {
+        return carName.contains(
+                SPACE.getSign()
+        );
     }
 }
