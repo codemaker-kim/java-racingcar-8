@@ -1,13 +1,13 @@
 package racingcar.global;
 
-public enum Seperator {
+public enum Separator {
     COMMA(","),
     COLON(":"),
     SPACE(" ");
 
     private final String sign;
 
-    Seperator(String sign) {
+    Separator(String sign) {
         this.sign = sign;
     }
 
