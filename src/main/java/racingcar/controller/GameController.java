@@ -1,20 +1,23 @@
 package racingcar.controller;
 
-import static java.util.stream.Collectors.toList;
-
 import java.util.List;
 import racingcar.controller.validator.TryCountValidator;
 import racingcar.model.Car;
+import racingcar.model.Cars;
+import racingcar.strategy.WinnerStrategy;
 import racingcar.view.input.InputView;
 import racingcar.view.output.OutputView;
 
 public class GameController {
 
     private static final int BASE_POSITION = 0;
-    private final List<Car> carList;
 
-    public GameController(List<Car> carList) {
-        this.carList = carList;
+    private final Cars cars;
+    private final WinnerStrategy winnerStrategy;
+
+    public GameController(Cars cars, WinnerStrategy winnerStrategy) {
+        this.cars = cars;
+        this.winnerStrategy = winnerStrategy;
     }
 
     public void play() {
@@ -25,7 +28,9 @@ public class GameController {
 
         runGame(tryCount);
 
-        List<Car> winners = findWinners();
+        List<Car> winners = winnerStrategy.findWinner(
+                cars.getCarList()
+        );
         OutputView.printWinners(winners);
     }
 
@@ -33,20 +38,12 @@ public class GameController {
         OutputView.printResultPrompt();
 
         for (int round = BASE_POSITION; round < tryCount; round++) {
-            carList.forEach(Car::accelerate);
-            OutputView.printRoundResult(carList);
+            cars.accelerateAll();
+
+            OutputView.printRoundResult(
+                    cars.getCarList()
+            );
         }
-    }
-
-    private List<Car> findWinners() {
-        int maxPosition = carList.stream()
-                .mapToInt(Car::getPosition)
-                .max()
-                .orElse(BASE_POSITION);
-
-        return carList.stream()
-                .filter(car -> car.getPosition() == maxPosition)
-                .collect(toList());
     }
 }
 
