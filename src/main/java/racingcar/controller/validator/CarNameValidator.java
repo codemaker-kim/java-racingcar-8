@@ -1,7 +1,7 @@
 package racingcar.controller.validator;
 
-import static racingcar.global.Seperator.COMMA;
-import static racingcar.global.Seperator.SPACE;
+import static racingcar.global.Separator.COMMA;
+import static racingcar.global.Separator.SPACE;
 
 import java.util.Arrays;
 import java.util.List;

@@ -9,6 +9,7 @@ import racingcar.model.Cars;
 import racingcar.strategy.WinnerStrategy;
 import racingcar.view.input.InputView;
 import racingcar.view.output.OutputView;
+import racingcar.view.output.dto.CarInfoListDto;
 
 public class GameController {
 
@@ -29,7 +30,10 @@ public class GameController {
         runGame(tryCount);
 
         List<Car> winners = cars.findWinners(strategy);
-        OutputView.printWinners(winners);
+
+        OutputView.printWinners(
+                CarInfoListDto.from(winners)
+        );
     }
 
     private void runGame(int tryCount) {
@@ -38,10 +42,16 @@ public class GameController {
         for (int round = ZERO.intValue(); round < tryCount; round++) {
             cars.accelerateAll();
 
-            OutputView.printRoundResult(
-                    cars.getCarList()
-            );
+            printRoundResult();
         }
+    }
+
+    private void printRoundResult() {
+        OutputView.printRoundResult(
+                CarInfoListDto.from(
+                        cars.getCarList()
+                )
+        );
     }
 }
 

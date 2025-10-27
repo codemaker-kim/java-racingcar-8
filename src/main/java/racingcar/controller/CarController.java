@@ -1,7 +1,7 @@
 package racingcar.controller;
 
 import static java.util.stream.Collectors.toList;
-import static racingcar.global.Seperator.COMMA;
+import static racingcar.global.Separator.COMMA;
 
 import java.util.Arrays;
 import java.util.List;
