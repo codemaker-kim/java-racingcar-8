@@ -1,7 +1,6 @@
 package racingcar.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,13 +10,13 @@ import racingcar.model.Car;
 import racingcar.model.Cars;
 import racingcar.model.RacingCar;
 
-class RacingCarWinnerStrategyTest {
+class MaxPositionWinnerStrategyTest {
 
     private WinnerStrategy winnerStrategy;
 
     @BeforeEach
     void setUp() {
-        winnerStrategy = new RacingCarWinnerStrategy();
+        winnerStrategy = new MaxPositionWinnerStrategy();
     }
 
     @Test

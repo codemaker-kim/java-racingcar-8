@@ -4,7 +4,7 @@ import racingcar.controller.CarController;
 import racingcar.controller.GameController;
 import racingcar.controller.dto.CarListDto;
 import racingcar.model.Cars;
-import racingcar.strategy.RacingCarWinnerStrategy;
+import racingcar.strategy.MaxPositionWinnerStrategy;
 
 public class Application {
     public static void main(String[] args) {
@@ -13,7 +13,7 @@ public class Application {
 
         GameController gameController = new GameController(
                 new Cars(carListDto.carList()),
-                new RacingCarWinnerStrategy()
+                new MaxPositionWinnerStrategy()
         );
 
         gameController.play();
