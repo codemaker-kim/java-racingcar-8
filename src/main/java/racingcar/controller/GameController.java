@@ -13,11 +13,11 @@ public class GameController {
     private static final int BASE_POSITION = 0;
 
     private final Cars cars;
-    private final WinnerStrategy winnerStrategy;
+    private final WinnerStrategy strategy;
 
-    public GameController(Cars cars, WinnerStrategy winnerStrategy) {
+    public GameController(Cars cars, WinnerStrategy strategy) {
         this.cars = cars;
-        this.winnerStrategy = winnerStrategy;
+        this.strategy = strategy;
     }
 
     public void play() {
@@ -28,9 +28,7 @@ public class GameController {
 
         runGame(tryCount);
 
-        List<Car> winners = winnerStrategy.findWinner(
-                cars.getCarList()
-        );
+        List<Car> winners = cars.findWinners(strategy);
         OutputView.printWinners(winners);
     }
 

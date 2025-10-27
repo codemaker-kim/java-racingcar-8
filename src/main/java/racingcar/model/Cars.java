@@ -1,6 +1,7 @@
 package racingcar.model;
 
 import java.util.List;
+import racingcar.strategy.WinnerStrategy;
 
 public class Cars {
     private final List<Car> carList;
@@ -15,5 +16,9 @@ public class Cars {
 
     public List<Car> getCarList() {
         return List.copyOf(carList);
+    }
+
+    public List<Car> findWinners(WinnerStrategy strategy) {
+        return strategy.findWinner(getCarList());
     }
 }
